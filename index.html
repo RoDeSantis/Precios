@@ -1,0 +1,58 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Precio del artículo</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+      background-color: #f9f9f9;
+      margin-top: 50px;
+    }
+    h1 {
+      font-size: 3em;
+      color: #2c3e50;
+    }
+    .precio {
+      font-size: 4em;
+      font-weight: bold;
+      color: #e74c3c;
+      margin-top: 30px;
+      border: 5px solid #e74c3c;
+      border-radius: 50%;
+      display: inline-block;
+      padding: 40px;
+      background-color: #fff;
+    }
+  </style>
+</head>
+<body>
+  <h1 id="nombre">Artículo</h1>
+  <div id="precio" class="precio">Cargando...</div>
+
+  <script>
+    // Obtener el parámetro id de la URL
+    const params = new URLSearchParams(window.location.search);
+    const id = params.get("id");
+
+    fetch("precios.json")
+      .then(response => response.json())
+      .then(data => {
+        const articulo = data.find(item => item.art_barras === id);
+        if (articulo) {
+          document.getElementById("nombre").textContent = articulo.art_descri;
+          document.getElementById("precio").textContent = "$" + articulo.precio_final;
+        } else {
+          document.getElementById("nombre").textContent = "Artículo no encontrado";
+          document.getElementById("precio").textContent = "";
+        }
+      })
+      .catch(error => {
+        document.getElementById("nombre").textContent = "Error al cargar precios";
+        console.error(error);
+      });
+  </script>
+</body>
+</html>

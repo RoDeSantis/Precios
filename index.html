@@ -7,19 +7,23 @@
   <style>
     body {
       font-family: Arial, sans-serif;
-      text-align: center;
       background-color: #f9f9f9;
-      margin-top: 50px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center; /* centra verticalmente */
+      align-items: center;     /* centra horizontalmente */
+      height: 100vh;           /* ocupa toda la altura de la ventana */
+      margin: 0;
     }
     h1 {
-      font-size: 3em;
+      font-size: 2.5em;
       color: #2c3e50;
+      margin-bottom: 20px;
     }
     .precio {
       font-size: 4em;
       font-weight: bold;
       color: #e74c3c;
-      margin-top: 30px;
       border: 5px solid #e74c3c;
       border-radius: 50%;
       display: inline-block;
@@ -33,7 +37,6 @@
   <div id="precio" class="precio">Cargando...</div>
 
   <script>
-    // Obtener el parámetro id de la URL
     const params = new URLSearchParams(window.location.search);
     const id = params.get("id");
 
